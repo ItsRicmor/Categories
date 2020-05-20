@@ -1,4 +1,10 @@
 spring:
+  profiles:
+    active: "development"
+---
+
+spring:
+  profiles: "development"
   datasource:
     url: "jdbc:mysql://localhost/categories?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
     username: "root"
@@ -13,6 +19,23 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL57Dialect
+  output:
+    ansi:
+      enabled: always
+---
+
+spring:
+  profiles: "production"
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driverClassName: org.postgresql.Driver
+    maxActive: 10
+    maxIdle: 5
+    minIdle: 2
+    initialSize: 5
+    removeAbandoned: true
   output:
     ansi:
       enabled: always
